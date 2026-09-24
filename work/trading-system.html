@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<title>Rules-based trading system — Arsalan Fakhraei</title>
+<meta name="description" content="Written risk framework, automated daily market report and outcome log.">
+<link rel="stylesheet" href="/css/site.css">
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="brand" href="/">Arsalan Fakhraei</a><nav><a href="/">Home</a><a href="/#work">Work</a><a href="/work/trading-system.html" class="active">Trading system</a><a href="/assets/pdf/Arsalan_Fakhraei_Resume.pdf" target="_blank">Resume</a></nav></div></header>
+<main class="wrap">
+
+<div class="page-title"><div class="kicker">Trading process · February 2025 – present</div>
+<h1>A rules-based trading system</h1>
+<p class="lead">A written risk framework, an automated daily report that turns it into decisions, and a log that tests whether any of it works. Built for a live Interactive Brokers book. Positions and returns are not published; the process is.</p></div>
+
+<h2>1. The rule set</h2>
+<p>The framework is a nine-section document (v1.0, June 2026) with one ordering principle: survive first, compound second, learn third. Sizes are set before signals.</p>
+<table class="spec">
+<tr><th>Risk unit</th><td>1R = 0.5% of account equity, marked weekly. Every tactical trade risks at most 1R from entry to stop; stop distance sets size, never the other way round. Minimum stop distance is 1.25 × ATR(5).</td></tr>
+<tr><th>Portfolio heat</th><td>Open tactical risk capped at 3R. Maximum two concurrent tactical setups. A trade that would breach either cap is not taken, whatever its quality.</td></tr>
+<tr><th>Factor caps</th><td>Leveraged ETFs count at their multiplier. AI/semiconductor beta capped at 60% of equity delta-adjusted, of which levered vehicles at most 25%; metals 20%; any single name 15%.</td></tr>
+<tr><th>Three lanes</th><td>Core (unlevered index and mega-caps, sized to survive a −20% factor drawdown), rented leverage (defined entry, price stop, time stop and scale-out; never passively held), and a hedge lane bought only when implied volatility is in the bottom quartile of its 13-week range.</td></tr>
+<tr><th>Playbook selector</th><td>Each morning the modeled dealer-gamma regime and the event calendar pick one of three playbooks: A (fade, positive gamma), B (trend, negative gamma), or C (event override, no new levered exposure inside 24 hours of a binary). If the gamma model is stale or contradicts the tape, the tape wins and the model is fired for the day.</td></tr>
+<tr><th>Tripwires</th><td>An eight-indicator fragility meter with hysteresis: ≥ 5/8 red for two sessions halves levered exposure; ≥ 6/8 or a −2.5% index day takes it to zero. Re-risk only after three calm sessions, in halves, leverage last.</td></tr>
+<tr><th>Kill switch</th><td>−8% from the high-water mark within 20 sessions: all leverage to zero, five-session cooling period, written review of every trade before resumption at half size.</td></tr>
+<tr><th>Evidence gates</th><td>New playbooks trade at paper or quarter size until 20 logged trades show positive expectancy after costs and a sample drawdown under 6R; half size to 40 trades; full size after. Failing a gate moves back one phase.</td></tr>
+<tr><th>Override friction</th><td>Any deviation from the document is written in a signal-change log before the order. Unlogged overrides count as tilt; three in a month means a mandatory week flat.</td></tr>
+</table>
+
+<h2>2. The daily report</h2>
+<p>A Python pipeline runs each trading morning and produces a five-page Word document. Page one is a dashboard with almost no prose; the analysis is the appendix, not the product.</p>
+<ul class="list">
+<li><b>Gather:</b> settles and pre-market moves for a 20-name watchlist, indices, VIX, oil, rates and gold; HY credit spreads from FRED; the SPY and QQQ options chains for a modeled dealer-gamma profile; the next seven sessions of scheduled catalysts, each date verified against the publisher.</li>
+<li><b>Decide:</b> a regime strip (index, VIX, net gamma, spot versus flip level, oil, 10-year), a risk strip computed from the rule set (heat used, factor exposure versus caps, distance to the kill switch, fragility composite), and a position signal board with one of five signals per name and the level or event that flips it.</li>
+<li><b>Screen:</b> the session's largest movers are run through a small-cap mean-reversion filter; most are correctly rejected, and every one is logged with its Day-2 and Day-5 outcome whether or not it was traded.</li>
+<li><b>Lint and log:</b> the build enforces word caps, a fixed vocabulary and a "every fact appears once" rule, then appends the day's movers, signal changes and fragility reading to the strategy log.</li>
+</ul>
+<div class="facts"><div><b>100+</b><span>Issues since Apr 30, 2026</span></div><div><b>440</b><span>Logged mover outcomes</span></div><div><b>8</b><span>Fragility indicators</span></div><div><b>5 pages</b><span>Hard cap per issue</span></div></div>
+<p><a class="btn primary" href="/assets/pdf/Daily_Market_Movers_Sample_Sep2026.pdf" target="_blank">Sample issue: September 15, 2026 (dashboard and week-ahead pages)</a></p>
+<div class="figs"><figure><img src="/assets/img/dmm-cover.jpg" alt="Daily Market Movers page one"><figcaption>Page one: morning brief, regime strip, risk strip, position signal board.</figcaption></figure>
+<figure><img src="/assets/img/dmm-p2.jpg" alt="Daily Market Movers week-ahead page" onerror="this.parentElement.style.display='none'"><figcaption>Page two: forward calendar with pre-committed reactions and mapped SPY levels.</figcaption></figure></div>
+
+<h2>3. What the log is for</h2>
+<p>The point of the log is to find out whether the process has an edge before it is allowed to size up. So far the small-cap mean-reversion screen has produced 74 logged names and almost no passes; the ruleset treats that as zero evidence of edge, not as discipline, and keeps the screen at watch-only until the outcome data says otherwise. The fragility meter keeps its own accountability log: each elevated reading is scored against the following five sessions, and its record (mostly false alarms) is why it gates leverage rather than forecasting.</p>
+
+<h2>4. Honest note on how it was built</h2>
+<p>The code (Python, python-docx, options analytics, chart generation) was written with AI-assisted development. I wrote the rule set and the report specification, contributed the entry, exit and position-sizing logic, review every issue, and own every trade. If you want to test that, ask me why the stop sets the size, or what happens when the gamma model and the tape disagree.</p>
+<p class="note">Personal process documentation. Nothing here is investment advice, and no performance figures are published.</p>
+
+</main>
+<footer><div class="wrap"><span>© 2026 Arsalan Fakhraei · Vancouver, BC</span><span><a href="mailto:fakhraeiarsalan@gmail.com">fakhraeiarsalan@gmail.com</a> · <a href="https://www.linkedin.com/in/arsalan-fakhraei/" target="_blank" rel="noopener">LinkedIn</a></span></div></footer>
+</body>
+</html>
