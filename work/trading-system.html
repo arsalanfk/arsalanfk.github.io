@@ -8,6 +8,8 @@
 <title>How I trade — Arsalan Fakhraei</title>
 <meta name="description" content="Written risk framework, automated daily market report and outcome log.">
 <link rel="stylesheet" href="/css/site.css">
+<script src="/assets/js/plotly-2.35.2.min.js"></script>
+<script src="/assets/js/charts.js"></script>
 </head>
 <body>
 <header class="top"><div class="wrap"><a class="brand" href="/">Arsalan Fakhraei</a><nav><a href="/">Home</a><a href="/#work">Work</a><a href="/work/trading-system.html" class="active">How I trade</a><a href="/assets/pdf/Arsalan_Fakhraei_Resume.pdf" target="_blank">Resume</a></nav></div></header>
@@ -15,7 +17,7 @@
 
 <div class="page-title"><div class="kicker">Trading process · February 2025 – present</div>
 <h1>How I trade</h1>
-<p class="lead">A written rule set, a daily report that turns it into decisions, and a log that checks whether any of it works. This runs on a live Interactive Brokers account. No positions or returns on here, just the process.</p></div>
+<p class="lead">A written rule set, a daily report that turns it into decisions, and a log that checks whether any of it works. This runs on a live Interactive Brokers book that has held up to about US$87K. The results, including the bad ones, are in section 4.</p></div>
 
 <h2>1. The rules</h2>
 <p>Nine sections, v1.0 from June 2026. The order never changes: survive first, compound second, learn third. Sizes get decided before signals.</p>
@@ -47,10 +49,25 @@
 <h2>3. What the log is for</h2>
 <p>To find out if there's an edge before I'm allowed to size up. So far the small-cap mean-reversion screen has logged 74 names and almost no passes. The rules treat that as zero evidence of edge, not as discipline, so it stays watch-only until the outcome data says otherwise. The fragility meter has its own accountability log: every elevated reading gets scored against the next five sessions, and its record (mostly false alarms) is why it gates leverage instead of forecasting.</p>
 
-<h2>4. How it was built</h2>
-<p>The code (Python, python-docx, options analytics, charts) was written with AI help. I wrote the rules and the report spec, added the entry, exit and sizing logic, and read every issue before I do anything with the book. The trades are mine.</p>
-<p class="note">Personal process notes. Not investment advice, and no performance numbers are published.</p>
+<h2>4. The numbers</h2>
+<p>From my Interactive Brokers statement, all accounts combined, September 22, 2025 to September 21, 2026. Amounts in US dollars.</p>
+<div class="facts"><div><b>~$87K</b><span>Peak capital, after consolidating a second brokerage in March 2026</span></div><div><b>$50.8K</b><span>Net assets now, after $30.7K withdrawn</span></div><div><b>−12.5%</b><span>12-month time-weighted return</span></div><div><b>16 of 25</b><span>Tickers traded at a profit</span></div></div>
+<p>Most of the book worked. TSM was the best position (+$4.2K), and selling calls on TQQQ and NVDX added steady premium. Two positions undid all of it. IBX and QBTX are 2x daily single-stock ETFs, and together they are down $14.7K, realized and open. That is more than the other 23 tickers made combined (+$8.7K). Net over the year: −$6.0K mark-to-market after $312 in commissions.</p>
+<figure class="chart"><div id="pnl" style="height:720px"></div><figcaption>Mark-to-market P&amp;L by ticker, options grouped with their underlying. Includes open positions. Hover for the exact figure.</figcaption></figure>
+<p>What I take from it: a daily-reset 2x ETF on one company is two bets at once, the stock and the path, and in a drawdown both go against you. The rule set I wrote in June is built around that failure mode for tactical trades: leveraged ETFs count at their multiplier, rented leverage needs a price stop and a time stop, and no single name goes past 15% of equity.</p>
+<p><b>The exception, stated up front.</b> QBTX is a conviction position, not a tactical trade, and it breaks those caps: I've been adding to it on weakness to bring my average cost down, and as of the September 2026 statement it is about half the account. I'm holding it into December on the view that QBTS rallies. The rules govern everything else in the book; this one position is a deliberate override, and its result will show up in the next statement either way.</p>
 
+<h2>5. How it was built</h2>
+<p>The code (Python, python-docx, options analytics, charts) was written with AI help. I wrote the rules and the report spec, added the entry, exit and sizing logic, and read every issue before I do anything with the book. The trades are mine.</p>
+<p class="note">Personal account and process notes. Not investment advice. Figures are from the broker statement; account numbers are left out.</p>
+
+<script>
+const PNL=[["IBX", -7601.24], ["QBTX", -7134.35], ["IDXX", -525.42], ["CRWV", -484.45], ["AMZN", -350.28], ["GLD", -275.05], ["GOOG", -245.21], ["MSFT", -195.25], ["QBTZ", -29.45], ["GOOGL", 6.7], ["COST", 10.15], ["TSLL", 29.19], ["QQQ", 59.93], ["IONQ", 81.49], ["APH", 172.15], ["ASML", 173.61], ["SMR", 294.81], ["TSMX", 324.8], ["INTC", 441.63], ["RGTX", 443.86], ["IONX", 696.25], ["TER", 785.16], ["NVDX", 1398.94], ["TQQQ", 1687.1200000000001], ["TSM", 4241.75]];
+divbar('pnl',{y:PNL.map(d=>d[0]),x:PNL.map(d=>Math.round(d[1])),
+ text:PNL.map(d=>(d[1]<0?'−$':'+$')+Math.abs(Math.round(d[1])).toLocaleString()),
+ hover:PNL.map(d=>`<b>${d[0]}</b><br>${d[1]<0?'−':'+'}$${Math.abs(d[1]).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}`),
+ xtitle:'Mark-to-market P&L (US$)',range:[-9800,6200],rangeNarrow:[-13500,7000]});
+</script>
 </main>
 <footer><div class="wrap"><span>© 2026 Arsalan Fakhraei · Vancouver, BC</span><span><a href="mailto:fakhraeiarsalan@gmail.com">fakhraeiarsalan@gmail.com</a> · <a href="https://www.linkedin.com/in/arsalan-fakhraei/" target="_blank" rel="noopener">LinkedIn</a></span></div></footer>
 </body>
