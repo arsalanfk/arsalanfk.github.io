@@ -29,31 +29,31 @@
 <main class="wrap">
 <div class="page-title"><div class="kicker">Market research · COMM 365 · R · April 2026</div>
 <h1>Why people cancel Netflix</h1>
-<p class="lead">A team survey project on churn. We wrote the questionnaire, collected responses through Qualtrics, and I ran the statistics in R and presented the results. The short answer: the paid-sharing crackdown hurts more than the recommendation algorithm does.</p></div>
+<p class="lead">This was a team survey project on subscriber churn. Our team designed the questionnaire and collected responses through Qualtrics, and I conducted the statistical analysis in R and presented the results. The findings show that the paid-sharing policy has a stronger effect on cancellation than the recommendation algorithm.</p></div>
 
-<div class="facts"><div><b>44</b><span>Complete responses</span></div><div><b>0.66</b><span>R² of the full model</span></div><div><b>r = 0.47</b><span>Strongest single driver</span></div><div><b>7.4 / 10</b><span>Willing to switch</span></div></div>
+<div class="facts"><div><b>44</b><span>Complete responses</span></div><div><b>0.66</b><span>R² of the full model</span></div><div><b>r = 0.47</b><span>Strongest single driver</span></div><div><b>7.4 / 10</b><span>Average willingness to switch</span></div></div>
 
-<h2>The question</h2>
-<p>Netflix has three things going on at once: people complain about the recommendation feed, the company started charging for shared passwords, and competitors keep adding content. We wanted to know which of those actually moves someone toward cancelling. Every item was a 0 to 10 scale, and the outcome was "How likely are you to cancel or downgrade in the next six months?"</p>
+<h2>Research question</h2>
+<p>Netflix faces three issues at the same time: complaints about its recommendation feed, new fees for password sharing, and increasing competition. The goal of the study was to find out which of these has the greatest effect on a subscriber's decision to cancel. Each question used a 0 to 10 scale, and the outcome variable was the likelihood of cancelling or downgrading within the next six months.</p>
 
-<h2>What correlates with cancelling</h2>
-<p>I tested each item against cancellation intent with a Pearson correlation. Five of the ten came back significant at 5%. Feeling overwhelmed by choice or seeing repetitive titles did not matter on their own. Watching less because of that fatigue did.</p>
-<figure class="chart"><div id="nf-cor" style="height:420px"></div><figcaption>Pearson r with cancellation intent (0–10). Solid bars are significant at p &lt; 0.05; pale bars are not. Hover for r, p and n.</figcaption></figure>
+<h2>Drivers of cancellation</h2>
+<p>I tested each item against cancellation intent using a Pearson correlation. Five of the ten items were significant at the 5% level. Feeling overwhelmed by choice or seeing repetitive titles had no significant effect on its own, while watching less because of that fatigue did.</p>
+<figure class="chart"><div id="nf-cor" style="height:420px"></div><figcaption>Pearson correlation with cancellation intent (0–10). Solid bars are significant at p &lt; 0.05 and pale bars are not. Hover for r, p and sample size.</figcaption></figure>
 
-<h2>Where opinion sits</h2>
-<p>One-sample t-tests against the scale midpoint of 5. The paid-sharing policy scored 3.0 on fairness, far below neutral (p &lt; 0.0001), and people reported lower trust because of it. Switching intent averaged 7.4. Live sports and events, which Netflix has been pushing, landed below the midpoint.</p>
-<figure class="chart"><div id="nf-means" style="height:330px"></div><figcaption>Mean score per item with the neutral midpoint of 5 marked. Hover for the one-sided t-test p-value.</figcaption></figure>
+<h2>Subscriber attitudes</h2>
+<p>I used one-sample t-tests against the scale midpoint of 5. Respondents rated the fairness of the paid-sharing policy at 3.0, well below neutral (p &lt; 0.0001), and reported that it reduced their trust in Netflix. Willingness to switch to another service averaged 7.4. Live sports and events, an area Netflix has been expanding, scored below the midpoint.</p>
+<figure class="chart"><div id="nf-means" style="height:330px"></div><figcaption>Mean score for each item, with the neutral midpoint of 5 marked. Hover for the one-sided t-test p-value.</figcaption></figure>
 
-<h2>Which feed layout people want</h2>
-<p>Respondents ranked five recommendation layouts from best to worst. Model 2 won clearly: mean rank 2.0 and first choice for 52% of people. A Friedman test says the rankings are not random (p &lt; 0.0001), so the layout is worth testing as a fatigue fix.</p>
-<figure class="chart"><div id="nf-rank" style="height:300px"></div><figcaption>Mean rank of each layout (1 = best), with the share who ranked it first. n = 46 who completed the ranking.</figcaption></figure>
+<h2>Preferred recommendation layout</h2>
+<p>Respondents ranked five recommendation layouts from best to worst. Model 2 was the clear preference, with a mean rank of 2.0, and 52% of respondents ranked it first. A Friedman test confirmed that the rankings were not random (p &lt; 0.0001), which suggests that the layout is worth testing as a way to reduce recommendation fatigue.</p>
+<figure class="chart"><div id="nf-rank" style="height:300px"></div><figcaption>Mean rank of each layout (1 = best) and the share of respondents who ranked it first. 46 respondents completed the ranking.</figcaption></figure>
 
-<h2>Putting it together</h2>
-<p>A multiple regression with every item predicting cancellation intent explains 66% of the variance (adjusted R² 0.56, n = 44). Five predictors are significant: how much paid sharing changed the person's plan, how fair they think it is, willingness to switch, perceived quality versus competitors, and watching less because of fatigue. The biggest coefficient belongs to paid sharing.</p>
-<p class="note">Limits: a convenience sample of 44 people, so this points at what to test rather than what the whole subscriber base thinks. The regression has ten predictors on 44 rows, which is why I lean on the adjusted R² and the individual correlations, not just the headline number.</p>
+<h2>Full model</h2>
+<p>A multiple regression using all items to predict cancellation intent explains 66% of the variance (adjusted R² of 0.56, n = 44). Five predictors are significant: the influence of paid sharing on the subscriber's plan, perceived fairness of the policy, willingness to switch, perceived quality compared with competitors, and reduced viewing due to fatigue. Paid sharing has the largest coefficient.</p>
+<p class="note">Limitations: the study used a convenience sample of 44 people, so the results indicate what should be tested further rather than the views of all subscribers. Because the regression includes ten predictors on 44 observations, I relied on the adjusted R² and the individual correlations rather than on the headline R² alone.</p>
 
 <h2>Tools</h2>
-<p>R for cleaning the Qualtrics export, the correlation and t-tests, the Friedman test and the regression. Python (matplotlib) for the presentation charts. The charts on this page are redrawn from the same survey data.</p>
+<p>I used R to clean the Qualtrics export and to run the correlations, t-tests, Friedman test and regression, and Python (matplotlib) for the presentation charts. The charts on this page were redrawn from the same survey data.</p>
 
 <script>
 const DATA={"cor":[{"q":"Q1","label":"Happy with recommendations","r":-0.247,"p":0.10198790174161708,"n":45},{"q":"Q2","label":"Overwhelmed by choice","r":-0.033,"p":0.8318935577363221,"n":45},{"q":"Q3","label":"Recommendations feel repetitive","r":0.048,"p":0.7536920986278511,"n":45},{"q":"Q4","label":"Watching less because of fatigue","r":0.423,"p":0.00375431346571043,"n":45},{"q":"Q6","label":"Paid-sharing policy is fair","r":0.109,"p":0.47768851174050997,"n":45},{"q":"Q7","label":"Sharing changes cut my trust","r":0.23,"p":0.12905990505684786,"n":45},{"q":"Q8","label":"Paid sharing changed my plan","r":0.467,"p":0.0012343713130687896,"n":45},{"q":"Q9","label":"Netflix beats competitors on quality","r":-0.451,"p":0.002115545288255677,"n":44},{"q":"Q10","label":"Live content adds value","r":-0.436,"p":0.002740630029549814,"n":45},{"q":"Q11","label":"Would switch for better value","r":0.429,"p":0.0032496545592253156,"n":45}],"means":[{"q":"Q6","label":"Paid-sharing policy is fair","mean":3.04,"p":3.391182855270158e-09,"n":45},{"q":"Q7","label":"Sharing changes cut my trust","mean":5.76,"p":0.007228869100774838,"n":45},{"q":"Q8","label":"Paid sharing changed my plan","mean":5.62,"p":0.024954936950932257,"n":45},{"q":"Q9","label":"Netflix beats competitors on quality","mean":6.41,"p":1.785507602919863e-05,"n":44},{"q":"Q10","label":"Live content adds value","mean":4.58,"p":0.8137069549516579,"n":45},{"q":"Q11","label":"Would switch for better value","mean":7.4,"p":5.97488428349019e-11,"n":45}],"ranks":[{"model":"Model 1","mean":2.35,"first":28},{"model":"Model 2","mean":2.02,"first":52},{"model":"Model 3","mean":2.91,"first":13},{"model":"Model 4","mean":3.52,"first":2},{"model":"Model 5","mean":4.2,"first":4}],"nrank":46};

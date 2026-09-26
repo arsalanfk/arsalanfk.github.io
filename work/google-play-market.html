@@ -29,23 +29,23 @@
 <main class="wrap">
 <div class="page-title"><div class="kicker">Business analytics · COMM 337 · Python · March 2026</div>
 <h1>The Google Play market in numbers</h1>
-<p class="lead">A pandas and matplotlib analysis of about 9,700 Google Play apps: which categories are crowded, which ones actually get installed, and whether charging for an app makes sense.</p></div>
+<p class="lead">An analysis of about 9,700 Google Play apps using pandas and matplotlib. The project looks at which categories are the most crowded, which ones receive the most installs, and whether charging for an app is a viable strategy.</p></div>
 
-<div class="facts"><div><b>7,021</b><span>Apps after cleaning</span></div><div><b>33</b><span>Categories</span></div><div><b>92%</b><span>Free to download</span></div><div><b>100K vs 5K</b><span>Median installs, free vs paid</span></div></div>
+<div class="facts"><div><b>7,021</b><span>Apps after cleaning</span></div><div><b>33</b><span>Categories</span></div><div><b>92%</b><span>Free to download</span></div><div><b>100K vs 5K</b><span>Median installs, free vs. paid</span></div></div>
 
-<h2>Crowded is not the same as popular</h2>
-<p>Family, Games and Tools have the most apps. But count and reach are different things: the median Game gets a million installs, while the median Medical or Finance app sits at 5,000 to 10,000. Education is small (88 apps) and still has a million-install median and the third-highest average rating.</p>
-<figure class="chart"><div id="ap-cat" style="height:760px"></div><figcaption>Median installs by category (log scale). Hover for number of apps and average rating.</figcaption></figure>
+<h2>Category size and popularity</h2>
+<p>Family, Games and Tools have the largest number of apps. However, the number of apps in a category does not reflect how often they are installed. The median game has one million installs, while the median medical or finance app has between 5,000 and 10,000. Education is a small category with 88 apps, yet it has a median of one million installs and the third-highest average rating.</p>
+<figure class="chart"><div id="ap-cat" style="height:760px"></div><figcaption>Median installs by category on a log scale. Hover for the number of apps and the average rating.</figcaption></figure>
 
-<h2>Ratings are bunched at the top</h2>
-<p>The average rating is 4.16 and the median 4.3, with most apps between 4.0 and 4.5. That compression makes rating a weak signal on its own. Its correlation with review count is close to zero (r = 0.07), so a highly rated app is not necessarily a well-known one.</p>
-<figure class="chart"><div id="ap-hist" style="height:300px"></div><figcaption>Distribution of app ratings (bins of 0.1).</figcaption></figure>
+<h2>Distribution of ratings</h2>
+<p>The average rating is 4.16 and the median is 4.3, with most apps rated between 4.0 and 4.5. Because ratings are so concentrated, they are a weak signal on their own. The correlation between rating and number of reviews is close to zero (r = 0.07), which means a highly rated app is not necessarily a widely used one.</p>
+<figure class="chart"><div id="ap-hist" style="height:300px"></div><figcaption>Distribution of app ratings in intervals of 0.1.</figcaption></figure>
 
-<h2>Free versus paid</h2>
-<p>Only 7.7% of apps charge. Paid apps rate slightly higher (4.24 against 4.15) but the median paid app has 5,000 installs against 100,000 for free ones. The median paid price is $2.99. Fourteen apps charge more than $300, most of them "I am rich" novelty apps. The business case is on the free side with monetization after install.</p>
+<h2>Free and paid apps</h2>
+<p>Only 7.7% of apps charge for downloads. Paid apps have slightly higher ratings (4.24 compared with 4.15), but the median paid app has 5,000 installs compared with 100,000 for free apps. The median price of a paid app is $2.99, and 14 apps charge more than $300, most of which are novelty apps. The data suggests that the stronger business model is a free app that earns revenue after installation.</p>
 
 <h2>Tools</h2>
-<p>Python: pandas for cleaning (dropped 2,638 rows with missing values), groupby aggregations and correlations; matplotlib for the original charts. Interactive versions here are redrawn from the same dataset.</p>
+<p>I used Python, with pandas to clean the data (removing 2,638 rows with missing values), run group-level aggregations and calculate correlations, and matplotlib for the original charts. The interactive charts on this page were redrawn from the same dataset.</p>
 
 <script>
 const DATA={"cat":[{"Category":"Art & Design","n":58,"med":100000.0,"r":4.38},{"Category":"Auto & Vehicles","n":63,"med":100000.0,"r":4.15},{"Category":"Beauty","n":37,"med":50000.0,"r":4.29},{"Category":"Books & Reference","n":141,"med":50000.0,"r":4.32},{"Category":"Business","n":222,"med":10000.0,"r":4.1},{"Category":"Comics","n":47,"med":100000.0,"r":4.17},{"Category":"Communication","n":188,"med":100000.0,"r":4.08},{"Category":"Dating","n":122,"med":100000.0,"r":3.96},{"Category":"Education","n":88,"med":1000000.0,"r":4.37},{"Category":"Entertainment","n":64,"med":1000000.0,"r":4.15},{"Category":"Events","n":38,"med":30000.0,"r":4.48},{"Category":"Family","n":1511,"med":100000.0,"r":4.18},{"Category":"Finance","n":258,"med":10000.0,"r":4.1},{"Category":"Food & Drink","n":72,"med":500000.0,"r":4.11},{"Category":"Game","n":832,"med":1000000.0,"r":4.24},{"Category":"Health & Fitness","n":191,"med":100000.0,"r":4.19},{"Category":"House & Home","n":50,"med":500000.0,"r":4.13},{"Category":"Libraries & Demo","n":60,"med":50000.0,"r":4.2},{"Category":"Lifestyle","n":269,"med":50000.0,"r":4.09},{"Category":"Maps & Navigation","n":94,"med":100000.0,"r":4.01},{"Category":"Medical","n":266,"med":5000.0,"r":4.16},{"Category":"News & Magazines","n":154,"med":50000.0,"r":4.14},{"Category":"Parenting","n":44,"med":100000.0,"r":4.35},{"Category":"Personalization","n":274,"med":50000.0,"r":4.32},{"Category":"Photography","n":204,"med":1000000.0,"r":4.11},{"Category":"Productivity","n":223,"med":100000.0,"r":4.13},{"Category":"Shopping","n":146,"med":1000000.0,"r":4.21},{"Category":"Social","n":156,"med":100000.0,"r":4.26},{"Category":"Sports","n":221,"med":100000.0,"r":4.2},{"Category":"Tools","n":625,"med":100000.0,"r":4.01},{"Category":"Travel & Local","n":141,"med":100000.0,"r":4.01},{"Category":"Video Players","n":112,"med":500000.0,"r":4.02},{"Category":"Weather","n":50,"med":500000.0,"r":4.24}],"hist":[16,1,0,3,3,4,8,8,10,11,8,14,20,19,18,23,21,40,43,72,62,58,96,113,147,152,191,257,312,448,534,671,719,722,689,563,390,205,84,266,0]};
