@@ -66,6 +66,8 @@
 <div class="facts"><div><b>~$87K</b><span>Peak capital, after transferring a second brokerage account in March 2026</span></div><div><b>$50.8K</b><span>Net assets today, after $30.7K in withdrawals</span></div><div><b>−12.5%</b><span>Time-weighted return over 12 months</span></div><div><b>16 of 25</b><span>Tickers traded at a profit</span></div></div>
 <p>Most positions were profitable. TSM was the best performer at +$4.2K, and selling call options on TQQQ and NVDX generated consistent premium income. However, two positions outweighed these gains. IBX and QBTX are 2x daily leveraged ETFs on single stocks, and together they lost $14.7K in realized and unrealized value, which is more than the +$8.7K earned by the other 23 tickers combined. The net result for the year was −$6.0K on a mark-to-market basis, after $312 in commissions.</p>
 <figure class="chart"><div id="pnl" style="height:720px"></div><figcaption>Mark-to-market profit and loss by ticker, with options grouped under their underlying security. Open positions are included. Hover over a bar for the exact figure.</figcaption></figure>
+<p>Seven of these stocks (TSM, APH, ASML, COST, IDXX, GOOGL and AMZN) came into the account with the March 2026 transfer, so the statement counts only their gains after that date. Measured from my original purchase price, their returns are shown below.</p>
+<figure class="chart"><div id="since" style="height:360px"></div><figcaption>Return from original purchase price to September 21, 2026. Hover over a bar for the exact figure.</figcaption></figure>
 <p>The main lesson is that a daily-reset leveraged ETF on a single company carries two risks, the direction of the stock and the path it takes, and both work against the holder in a drawdown. The rule set I wrote in June addresses this for tactical trades. Leveraged ETFs count at their full multiplier, leveraged positions require both a price stop and a time stop, and no single name may exceed 15% of equity.</p>
 <p><b>One exception.</b> QBTX is a long-term conviction position rather than a tactical trade, and it is held outside these limits. I have been adding to it on price weakness to lower my average cost, and as of the September 2026 statement it represents about half of the account. I plan to hold it through December based on my view that QBTS will recover. All other positions follow the rules, and the outcome of this decision will be reported in the next statement.</p>
 
@@ -79,6 +81,11 @@ divbar('pnl',{y:PNL.map(d=>d[0]),x:PNL.map(d=>Math.round(d[1])),
  text:PNL.map(d=>(d[1]<0?'−$':'+$')+Math.abs(Math.round(d[1])).toLocaleString()),
  hover:PNL.map(d=>`<b>${d[0]}</b><br>${d[1]<0?'−':'+'}$${Math.abs(d[1]).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}`),
  xtitle:'Mark-to-market P&L (US$)',range:[-9800,6200],rangeNarrow:[-13500,7000]});
+const SINCE=[["AMZN",-16.3],["GOOGL",0.2],["IDXX",0.9],["COST",1.8],["ASML",96.7],["APH",109.2],["TSM",156.2]];
+hbar('since',{y:SINCE.map(d=>d[0]),x:SINCE.map(d=>d[1]),color:SINCE.map(d=>d[1]>=0?C.blue:C.orange),
+ text:SINCE.map(d=>(d[1]<0?'−':'+')+Math.abs(d[1]).toFixed(1)+'%'),
+ hover:SINCE.map(d=>`<b>${d[0]}</b><br>${d[1]<0?'−':'+'}${Math.abs(d[1]).toFixed(1)}% since purchase`),
+ xtitle:'Return since original purchase (%)',range:document.getElementById('since').clientWidth<600?[-70,215]:[-40,190],zero:true});
 </script>
 </main>
 <footer><div class="wrap"><span>© 2026 Arsalan Fakhraei · Vancouver, BC</span><span><a href="mailto:fakhraeiarsalan@gmail.com">fakhraeiarsalan@gmail.com</a> · <a href="https://www.linkedin.com/in/arsalan-fakhraei/" target="_blank" rel="noopener">LinkedIn</a></span></div></footer>
