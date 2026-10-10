@@ -21,7 +21,7 @@
 <link rel="stylesheet" href="/css/site.css">
 <script>document.documentElement.classList.add('js')</script>
 <script src="/assets/js/site.js" defer></script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Arsalan Fakhraei", "url": "https://arsalanfakhraei.ca/", "jobTitle": "Finance student", "alumniOf": [{"@type": "CollegeOrUniversity", "name": "University of British Columbia, Sauder School of Business"}], "address": {"@type": "PostalAddress", "addressLocality": "Vancouver", "addressRegion": "BC", "addressCountry": "CA"}, "knowsAbout": ["Equity research", "Financial markets", "Trading", "Data analytics"], "sameAs": ["https://www.linkedin.com/in/arsalan-fakhraei/", "https://github.com/arsalanfk"]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Arsalan Fakhraei", "url": "https://arsalanfakhraei.ca/", "jobTitle": "Finance student", "alumniOf": [{"@type": "CollegeOrUniversity", "name": "University of British Columbia, Sauder School of Business"}], "address": {"@type": "PostalAddress", "addressLocality": "Vancouver", "addressRegion": "BC", "addressCountry": "CA"}, "knowsAbout": ["Equity research", "Financial markets", "Trading", "Data analytics", "Robotics", "Electronics"], "sameAs": ["https://www.linkedin.com/in/arsalan-fakhraei/", "https://github.com/arsalanfk"]}</script>
 </head>
 <body>
 <header class="nav"><div class="nav-in"><a class="brand" href="/">Arsalan Fakhraei</a><nav class="links" aria-label="Main"><a href="/#work">Work</a><a href="/work/trading-system.html">Trading</a><a href="/#analytics">Analytics</a><a href="/#about">About</a></nav><a class="nav-cta" href="/assets/pdf/Arsalan_Fakhraei_Resume.pdf" target="_blank">Resume</a><button class="menu" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button></div></header>
@@ -114,12 +114,36 @@
 </section>
 
 <section class="section gray" id="about">
-  <div class="wrap about">
-    <div class="reveal"><div class="eyebrow">About</div><h2>About me</h2></div>
-    <div class="reveal">
-      <p>I grew up in Tehran and now live in Vancouver. I completed two years in UBC Okanagan's Faculty of Management before transferring to the Sauder School of Business in 2024, where I study in the Finance option with a concentration in Business Analytics. Outside of class, I manage a personal trading account and write a weekly market report for an investment group of four that includes a wealth manager and a commercial banker. I use AI tools when building models and reports, and the analysis and decisions behind them are my own.</p>
-      <p>Outside of finance, I play tennis and the violin, enjoy making espresso and hosting board-game nights, and I am learning French.</p>
+  <div class="wrap">
+    <div class="about">
+      <div class="reveal"><div class="eyebrow">About</div><h2>From robots to markets</h2></div>
+      <div class="reveal">
+        <p>Both of my parents studied electrical engineering, and for most of my life I planned to become an engineer too. I was more drawn to the mechanical side, so I started building robots and entering competitions as a child. As I got older I built small devices for our home, such as a candy bowl that opened when someone reached for it and closed again once they had taken a piece.</p>
+        <p>At 15 I joined the under-19 robotics team at Amirkabir University of Technology in Tehran. We competed in Mission Impossible at FIRA RoboCup Iran, where each team builds and programs a robot from scratch for a mission that is only revealed at the venue. We did not place in our first two attempts. Before the third, we reorganized the team so that each person had a clear role and one member moved to whichever task was falling behind. That year we finished third in the country and qualified for the international round, although we could not attend because we did not have a sponsor. I led the team and was responsible for the mechanics and electronics.</p>
+        <p>I also built robots on my own, including a self-balancing robot controlled by a PID loop, and I designed circuit boards in Altium and parts in SolidWorks. For a short time I trained as a technician repairing circuit boards that had failed quality control, finding faults with a multimeter and a microscope and reworking delicate, high-value boards by hand. I studied electrical engineering for a year at Islamic Azad University before moving to Canada in 2022.</p>
+        <p>Engineering taught me not to trust a system until I understand how it works. I bring that habit to finance. When I learn a formula, I want to know what problem it was created to solve and what it assumes. When I look at a company or a market, I look for the parts that are redundant, correlated with each other, or likely to fail. That habit is behind most of the work on this site, from the <a href="/work/sp500-curve-fit-detector.html">dashboard</a> that tests whether the S&amp;P 500 is really repeating 2000 to the fragility meter in my daily report.</p>
+        <p>Today I study finance at UBC Sauder, manage a personal trading account, and write a weekly market report for an investment group of four that includes a wealth manager and a commercial banker. I use AI tools when building models and reports, and the analysis and decisions behind them are my own. Outside of work, I play tennis and the violin, make espresso, host board-game nights, and am learning French.</p>
+      </div>
     </div>
+    <div class="story-photos">
+      <figure class="reveal"><img src="/assets/img/robotics-competition.jpg" alt="Arsalan as a child at a robotics competition in Tehran, standing beside his robot" width="900" height="1200" loading="lazy" style="object-position:center 42%"><figcaption>At one of my first robotics competitions in Tehran.</figcaption></figure>
+      <figure class="reveal"><img src="/assets/img/robot-firefighter.jpg" alt="Yellow and black wheeled robot with ultrasonic sensors and an Arduino board" width="1200" height="900" loading="lazy"><figcaption>A robot I built to follow a line into a dark room, find a lit candle by its heat, put it out, and then get through an obstacle course.</figcaption></figure>
+      <figure class="reveal"><img src="/assets/img/pcb-rework-bench.jpg" alt="Electronics rework bench with a stereo microscope, soldering station and a circuit board" width="1200" height="900" loading="lazy" style="object-position:12% center"><figcaption>The bench where I repaired circuit boards that had failed quality control.</figcaption></figure>
+    </div>
+    <div class="story-videos">
+      <figure class="reveal"><video src="/assets/video/self-balancing-robot.mp4" poster="/assets/img/self-balancing-robot-poster.jpg" width="720" height="1280" muted loop playsinline preload="metadata" aria-label="Two-wheeled robot balancing upright on its own"></video><figcaption>A self-balancing robot I built in 2018. A PID controller reads how far it is tilting and drives the wheels to keep it upright.</figcaption></figure>
+      <figure class="reveal"><video src="/assets/video/line-following-robot.mp4" poster="/assets/img/line-following-robot-poster.jpg" width="720" height="1280" muted loop playsinline preload="metadata" aria-label="Yellow robot following a black line along a practice track"></video><figcaption>The yellow robot following a line on a practice track in 2019.</figcaption></figure>
+    </div>
+    <script>
+    (function(){
+      var vids=document.querySelectorAll('.story-videos video');
+      var still=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      vids.forEach(function(v){ v.muted=true; if(still){v.controls=true;} });
+      if(still||!('IntersectionObserver' in window)){ if(!still) vids.forEach(function(v){v.play().catch(function(){});}); return; }
+      var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.play().catch(function(){}); } else { e.target.pause(); } }); },{threshold:.35});
+      vids.forEach(function(v){ io.observe(v); });
+    })();
+    </script>
   </div>
 </section>
 
