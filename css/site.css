@@ -169,17 +169,13 @@ a.more:hover::after{transform:translateX(4px)}
 .papers img{position:absolute;width:84%;height:auto;border-radius:3px;box-shadow:0 1px 2px rgba(11,22,48,.14),0 18px 36px -20px rgba(11,22,48,.5),0 0 0 1px rgba(20,33,61,.05)}
 .papers img:first-child{left:0;top:0;transform:rotate(-2deg)}
 .papers img:last-child{right:0;bottom:0;transform:rotate(1.5deg)}
-.ch.two{grid-template-rows:auto 1fr}
-.ch.two .ch-side{grid-row:1/3}
-.ch-cont{grid-row:2;margin-top:2.6rem}
+.ch-cont{margin-top:2.6rem}
 @media (max-width:900px){
   .ch{grid-template-columns:1fr;column-gap:0}
-  .ch.two{grid-template-rows:auto}
-  .ch.two .ch-side{grid-row:2}
   .ch+.ch{margin-top:64px}
   .ch-text{grid-column:1;grid-row:1}
   .ch-side{grid-column:1;grid-row:2;margin-top:24px;max-width:360px}
-  .ch-text.ch-cont{grid-column:1;grid-row:3;margin-top:48px}
+  .ch-cont{margin-top:48px}
 }
 @media (max-width:720px){
   .ch+.ch{margin-top:56px}
