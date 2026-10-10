@@ -60,4 +60,18 @@
       });
     },{passive:true});
   }
+
+  // Story videos: silent, play while on screen, pause when scrolled away
+  var vids=d.querySelectorAll('.ch-media video');
+  if(vids.length){
+    vids.forEach(function(v){ v.muted=true; if(reduce){ v.controls=true; } });
+    if(!reduce){
+      if('IntersectionObserver' in window){
+        var vio=new IntersectionObserver(function(entries){
+          entries.forEach(function(en){ if(en.isIntersecting){ en.target.play().catch(function(){}); } else { en.target.pause(); } });
+        },{threshold:0.35});
+        vids.forEach(function(v){ vio.observe(v); });
+      } else { vids.forEach(function(v){ v.play().catch(function(){}); }); }
+    }
+  }
 })();

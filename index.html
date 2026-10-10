@@ -115,35 +115,99 @@
 
 <section class="section gray" id="about">
   <div class="wrap">
-    <div class="about">
-      <div class="reveal"><div class="eyebrow">About</div><h2>From robots to markets</h2></div>
-      <div class="reveal">
-        <p>Both of my parents studied electrical engineering, and for most of my life I planned to become an engineer too. I was more drawn to the mechanical side, so I started building robots and entering competitions as a child. As I got older I built small devices for our home, such as a candy bowl that opened when someone reached for it and closed again once they had taken a piece.</p>
-        <p>At 15 I joined the under-19 robotics team at Amirkabir University of Technology in Tehran. We competed in Mission Impossible at FIRA RoboCup Iran, where each team builds and programs a robot from scratch for a mission that is only revealed at the venue. We did not place in our first two attempts. Before the third, we reorganized the team so that each person had a clear role and one member moved to whichever task was falling behind. That year we finished third in the country and qualified for the international round, although we could not attend because we did not have a sponsor. I led the team and was responsible for the mechanics and electronics.</p>
-        <p>I also built robots on my own, including a self-balancing robot controlled by a PID loop, and I designed circuit boards in Altium and parts in SolidWorks. For a short time I trained as a technician repairing circuit boards that had failed quality control, finding faults with a multimeter and a microscope and reworking delicate, high-value boards by hand. I studied electrical engineering for a year at Islamic Azad University before moving to Canada in 2022.</p>
-        <p>Engineering taught me not to trust a system until I understand how it works. I bring that habit to finance. When I learn a formula, I want to know what problem it was created to solve and what it assumes. When I look at a company or a market, I look for the parts that are redundant, correlated with each other, or likely to fail. That habit is behind most of the work on this site, from the <a href="/work/sp500-curve-fit-detector.html">dashboard</a> that tests whether the S&amp;P 500 is really repeating 2000 to the fragility meter in my daily report.</p>
-        <p>Today I study finance at UBC Sauder, manage a personal trading account, and write a weekly market report for an investment group of four that includes a wealth manager and a commercial banker. I use AI tools when building models and reports, and the analysis and decisions behind them are my own. Outside of work, I play tennis and the violin, make espresso, host board-game nights, and am learning French.</p>
-      </div>
+    <div class="sec-head reveal"><div class="eyebrow">About</div><h2>From robots to markets</h2><p>I grew up building robots in Tehran. This is how that turned into finance.</p></div>
+    <div class="story">
+
+      <article class="ch reveal">
+        <div class="ch-text">
+          <div class="ch-year">2012</div>
+          <h3>It started with robots</h3>
+          <p>Both of my parents studied electrical engineering, and for most of my childhood I assumed I would too. I was more interested in the mechanical side, so I started building robots and entering competitions as a kid. At home I built small gadgets, like a candy bowl that opened when someone reached for it and closed again once they had taken a piece.</p>
+        </div>
+        <figure class="ch-media">
+          <img src="/assets/img/robotics-competition.jpg" alt="Arsalan as a child at a robotics competition in Tehran, standing beside his robot" width="900" height="1200" loading="lazy">
+          <figcaption>One of my first competitions, in Tehran.</figcaption>
+        </figure>
+      </article>
+
+      <article class="ch flip reveal">
+        <div class="ch-text">
+          <div class="ch-year">2015</div>
+          <h3>Joining the team</h3>
+          <p>In high school I joined the under-19 robotics team at Amirkabir University of Technology. Our event at FIRA RoboCup Iran was Mission Impossible: each team builds and programs a robot from scratch for a mission that is only revealed at the venue. We did not place in our first two years. I kept the certificates anyway.</p>
+        </div>
+        <figure class="ch-media">
+          <div class="papers">
+            <img src="/assets/img/certificate-2018.jpg" alt="Certificate of participation, AUTCUP 2018, Mission Impossible Junior" width="1100" height="825" loading="lazy">
+            <img src="/assets/img/certificate-2019.jpg" alt="Certificate of participation, Iran FIRA RoboWorldCup Open 2019, Mission Impossible U19" width="1100" height="825" loading="lazy">
+          </div>
+          <figcaption>Participation certificates from 2018 and 2019. In 2018 this was all we took home. In 2019 we finished third.</figcaption>
+        </figure>
+      </article>
+
+      <article class="ch reveal">
+        <div class="ch-text">
+          <div class="ch-year">2018</div>
+          <h3>Building on my own</h3>
+          <p>Between competitions I built my own projects to learn: a self-balancing robot that stays upright with a PID controller, a pendulum counter, and a calculator I coded and wired myself. I designed my own circuit boards in Altium Designer, had them printed, and drew the mechanical parts in SolidWorks.</p>
+        </div>
+        <figure class="ch-media">
+          <video src="/assets/video/self-balancing-robot.mp4" poster="/assets/img/self-balancing-robot-poster.jpg" width="720" height="960" muted loop playsinline preload="metadata" aria-label="Two-wheeled robot balancing upright on its own"></video>
+          <figcaption>The self-balancing robot. A PID loop reads how far it is tilting and drives the wheels to correct it.</figcaption>
+        </figure>
+      </article>
+
+      <article class="ch flip reveal">
+        <div class="ch-text">
+          <div class="ch-year" data-year="2018"></div>
+          <h3>Fixing what failed</h3>
+          <p>For a month I trained as a technician repairing circuit boards that had failed quality control. The job was finding the fault with a multimeter and a microscope, then reworking the board by hand. The high-value boards were done this way because the machines were not precise enough for them.</p>
+        </div>
+        <figure class="ch-media">
+          <img src="/assets/img/pcb-rework-bench.jpg" alt="Electronics rework bench with a stereo microscope, soldering station and a circuit board" width="1200" height="900" loading="lazy">
+          <figcaption>The rework bench: a stereo microscope, a soldering station, and a board waiting for repair.</figcaption>
+        </figure>
+      </article>
+
+      <article class="ch reveal">
+        <div class="ch-text">
+          <div class="ch-year">2019</div>
+          <h3>The third attempt</h3>
+          <p>Before our third year we rebuilt the team around four people: one dedicated programmer, one member whose only job was to move to whichever task was falling behind, and two of us covering the rest. I led the team, built the mechanics and electronics, and backed up the code.</p>
+          <p>That year we finished third in the country and qualified for the international round, which we could not attend because we had no sponsor.</p>
+        </div>
+        <figure class="ch-media">
+          <video src="/assets/video/line-following-robot.mp4" poster="/assets/img/line-following-robot-poster.jpg" width="720" height="960" muted loop playsinline preload="metadata" aria-label="Yellow robot following a black line along a test track"></video>
+          <figcaption>A test run on the line-following track at the 2019 competition.</figcaption>
+        </figure>
+        <figure class="ch-wide">
+          <img src="/assets/img/robot-2019.jpg" alt="The 2019 competition robot: a yellow chassis on four wheels with two ultrasonic sensors on the front and an Arduino board underneath" width="1600" height="1067" loading="lazy">
+          <figcaption>The robot we took to the 2019 competition. It had to follow a line into a dark room, find a lit candle by its heat, put it out, and then get out through an obstacle course. The two sensors on the front are ultrasonic rangefinders for the obstacles.</figcaption>
+        </figure>
+      </article>
+
+      <article class="ch flip reveal">
+        <div class="ch-text">
+          <div class="ch-year">2020</div>
+          <h3>A different kind of system</h3>
+          <p>After high school I studied electrical engineering for a year at Islamic Azad University, then moved to Canada in 2022 and chose business instead: two years at UBC Okanagan, then the Sauder School of Business, where I study finance.</p>
+          <p>The engineering habits came with me. I do not trust a system until I understand how it works. When I learn a formula, I want to know what problem it was built to solve and what it assumes. When I look at a company or a market, I look for the parts that are redundant, correlated with each other, or likely to fail. That habit is behind most of the work on this site, from the fragility meter in my <a href="/work/trading-system.html">daily report</a> to the dashboard that tests whether the S&amp;P 500 is really repeating 2000.</p>
+        </div>
+        <figure class="ch-media">
+          <a href="/work/sp500-curve-fit-detector.html"><img src="/assets/img/sp500-cover.jpg" alt="Dot-com curve-fit detector dashboard" width="1280" height="900" loading="lazy"></a>
+          <figcaption>The dashboard. Most of the resemblance to 2000 turns out to be curve fitting.</figcaption>
+        </figure>
+      </article>
+
+      <article class="ch end reveal">
+        <div class="ch-text">
+          <div class="ch-year">2026</div>
+          <h3>Today</h3>
+          <p>I am in my final year at UBC Sauder, in the Finance option with a concentration in Business Analytics. I manage a personal trading account and write a weekly market report for an investment group of four that includes a wealth manager and a commercial banker. I use AI tools when building models and reports; the analysis and the decisions behind them are my own. Outside of work I play tennis and the violin, make espresso, host board-game nights, and am learning French.</p>
+        </div>
+      </article>
+
     </div>
-    <div class="story-photos">
-      <figure class="reveal"><img src="/assets/img/robotics-competition.jpg" alt="Arsalan as a child at a robotics competition in Tehran, standing beside his robot" width="900" height="1200" loading="lazy" style="object-position:center 42%"><figcaption>At one of my first robotics competitions in Tehran.</figcaption></figure>
-      <figure class="reveal"><img src="/assets/img/robot-firefighter.jpg" alt="Yellow and black wheeled robot with ultrasonic sensors and an Arduino board" width="1200" height="900" loading="lazy"><figcaption>A robot I built to follow a line into a dark room, find a lit candle by its heat, put it out, and then get through an obstacle course.</figcaption></figure>
-      <figure class="reveal"><img src="/assets/img/pcb-rework-bench.jpg" alt="Electronics rework bench with a stereo microscope, soldering station and a circuit board" width="1200" height="900" loading="lazy" style="object-position:12% center"><figcaption>The bench where I repaired circuit boards that had failed quality control.</figcaption></figure>
-    </div>
-    <div class="story-videos">
-      <figure class="reveal"><video src="/assets/video/self-balancing-robot.mp4" poster="/assets/img/self-balancing-robot-poster.jpg" width="720" height="1280" muted loop playsinline preload="metadata" aria-label="Two-wheeled robot balancing upright on its own"></video><figcaption>A self-balancing robot I built in 2018. A PID controller reads how far it is tilting and drives the wheels to keep it upright.</figcaption></figure>
-      <figure class="reveal"><video src="/assets/video/line-following-robot.mp4" poster="/assets/img/line-following-robot-poster.jpg" width="720" height="1280" muted loop playsinline preload="metadata" aria-label="Yellow robot following a black line along a practice track"></video><figcaption>The yellow robot following a line on a practice track in 2019.</figcaption></figure>
-    </div>
-    <script>
-    (function(){
-      var vids=document.querySelectorAll('.story-videos video');
-      var still=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      vids.forEach(function(v){ v.muted=true; if(still){v.controls=true;} });
-      if(still||!('IntersectionObserver' in window)){ if(!still) vids.forEach(function(v){v.play().catch(function(){});}); return; }
-      var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.play().catch(function(){}); } else { e.target.pause(); } }); },{threshold:.35});
-      vids.forEach(function(v){ io.observe(v); });
-    })();
-    </script>
   </div>
 </section>
 
