@@ -62,7 +62,7 @@
   }
 
   // Story videos: silent, play while on screen, pause when scrolled away
-  var vids=d.querySelectorAll('.ch-media video');
+  var vids=d.querySelectorAll('.ch-side video');
   if(vids.length){
     vids.forEach(function(v){ v.muted=true; if(reduce){ v.controls=true; } });
     if(!reduce){
