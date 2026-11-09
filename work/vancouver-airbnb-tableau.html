@@ -7,12 +7,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
-<title>Vancouver Airbnb, 4,001 listings — Arsalan Fakhraei</title>
+<title>Vancouver Airbnb, 4,001 listings | Arsalan Fakhraei</title>
 <meta name="description" content="Tableau analysis of Vancouver Airbnb listings: neighbourhoods, host concentration and growth.">
 <link rel="canonical" href="https://arsalanfakhraei.ca/work/vancouver-airbnb-tableau.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Arsalan Fakhraei">
-<meta property="og:title" content="Vancouver Airbnb, 4,001 listings — Arsalan Fakhraei">
+<meta property="og:title" content="Vancouver Airbnb, 4,001 listings | Arsalan Fakhraei">
 <meta property="og:description" content="Tableau analysis of Vancouver Airbnb listings: neighbourhoods, host concentration and growth.">
 <meta property="og:url" content="https://arsalanfakhraei.ca/work/vancouver-airbnb-tableau.html">
 <meta property="og:image" content="https://arsalanfakhraei.ca/assets/img/ifc-val.jpg">
@@ -35,7 +35,7 @@
 
 <h2>Location of listings</h2>
 <p>Downtown has 980 listings, about a quarter of the city's total, and is also the most expensive neighbourhood. Downtown Eastside and Kitsilano follow. In the busiest neighbourhoods, more than 80% of listings are entire units, while on the residential west side (Kerrisdale, Oakridge and Shaughnessy) private rooms make up close to half.</p>
-<figure class="chart"><div id="ab-map" style="height:460px"></div><figcaption>Each listing plotted by location and coloured by room type. Hover for the nightly price.</figcaption></figure><figure class="chart"><div id="ab-hood" style="height:620px"></div><figcaption>Number of listings by neighbourhood. Hover for the median price and the share of entire homes.</figcaption></figure>
+<figure class="chart"><div id="ab-map" style="height:520px"></div><figcaption>Each listing plotted on a map of Vancouver and coloured by room type. Hover for the nightly price, and drag to move around the map.</figcaption></figure><figure class="chart"><div id="ab-hood" style="height:620px"></div><figcaption>Number of listings by neighbourhood. Hover for the median price and the share of entire homes.</figcaption></figure>
 
 <h2>Host concentration</h2>
 <p>The dataset includes 2,831 hosts. Of these, 434 have more than one listing, and together they operate 40% of all listings. A quarter of listings also require stays of 90 nights or longer, which makes them furnished mid-term rentals rather than short-term stays. This suggests that the market functions more as a rental business than as residents renting out spare rooms.</p>
@@ -56,8 +56,8 @@ const DATA={"pts":[[-123.1051,49.2477,"E",141],[-123.1259,49.2812,"E",274],[-123
 (function(){
  const types=[['E','Entire home/apt',C.blue],['P','Private room',C.orange],['S','Shared room',C.teal]];
  const hoodOf={};
- scatterMap('ab-map',types.map(([k,name,col])=>{const p=DATA.pts.filter(d=>d[2]===k);
-   return {name, color:col, x:p.map(d=>d[0]), y:p.map(d=>d[1]), hover:p.map(d=>`${name}<br>$${d[3]} / night`)};}));
+ tileMap('ab-map',types.map(([k,name,col])=>{const p=DATA.pts.filter(d=>d[2]===k);
+   return {name, color:col, x:p.map(d=>d[0]), y:p.map(d=>d[1]), hover:p.map(d=>`${name}<br>$${d[3]} / night`)};}),{center:{lon:-123.122,lat:49.2485},zoom:11.0});
  const h=DATA.hood;
  hbar('ab-hood',{y:h.map(d=>d.neighbourhood),x:h.map(d=>d.n),color:C.blue,
    text:h.map(d=>d.n.toLocaleString()),

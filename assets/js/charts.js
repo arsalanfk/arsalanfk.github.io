@@ -36,6 +36,22 @@ function scatterMap(id,groups){
     yaxis:ax(null,{showticklabels:false,showgrid:false,linecolor:'rgba(0,0,0,0)',scaleanchor:'x',scaleratio:1.52}),
     margin:{l:0,r:0,t:30,b:0}});
   Plotly.newPlot(id,tr,lay,CFG);}
+// Real basemap (MapLibre + CARTO Positron tiles); falls back to the plain scatter if tiles can't load.
+function tileMap(id,groups,view){
+  const draw=()=>{
+    const tr=groups.map(g=>({type:'scattermap',mode:'markers',name:g.name,lon:g.x,lat:g.y,hovertext:g.hover,hoverinfo:'text',
+      marker:{size:6,color:g.color,opacity:0.8}}));
+    const lay=base({showlegend:true,legend:{orientation:'h',x:0,y:1.08,font:{color:C.ink2,size:12.5}},
+      map:{style:'carto-positron',center:view.center,zoom:(document.getElementById(id).clientWidth<600?view.zoom-0.7:view.zoom)},
+      margin:{l:0,r:0,t:34,b:0}});
+    Plotly.newPlot(id,tr,lay,Object.assign({},CFG,{scrollZoom:false}));
+  };
+  const ctl=('AbortController' in window)?new AbortController():null;
+  const t=setTimeout(()=>ctl&&ctl.abort(),5000);
+  fetch('https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',ctl?{signal:ctl.signal}:{})
+    .then(r=>{clearTimeout(t);if(!r.ok)throw 0;draw();})
+    .catch(()=>{clearTimeout(t);scatterMap(id,groups);});
+}
 function divbar(id,o){ // P&L bars: gains blue, losses orange, value labels on every bar end
   const t={type:'bar',orientation:'h',y:o.y,x:o.x,marker:{color:o.x.map(v=>v>=0?C.blue:C.orange),line:{width:0}},
     hovertext:o.hover,hoverinfo:'text',text:o.text,textposition:'outside',cliponaxis:false,textfont:{color:C.ink2,size:12}};
