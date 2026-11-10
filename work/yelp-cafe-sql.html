@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1630">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<title>Opening an independent café: what Yelp data says | Arsalan Fakhraei</title>
+<meta name="description" content="SQL analysis of the Yelp dataset in Google BigQuery: which review themes go with higher ratings, and when independent cafés are busiest.">
+<link rel="canonical" href="https://arsalanfakhraei.ca/work/yelp-cafe-sql.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Arsalan Fakhraei">
+<meta property="og:title" content="Opening an independent café: what Yelp data says | Arsalan Fakhraei">
+<meta property="og:description" content="SQL analysis of the Yelp dataset in Google BigQuery: which review themes go with higher ratings, and when independent cafés are busiest.">
+<meta property="og:url" content="https://arsalanfakhraei.ca/work/yelp-cafe-sql.html">
+<meta property="og:image" content="https://arsalanfakhraei.ca/assets/img/ifc-val.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2314213d'/%3E%3Ctext x='32' y='42' font-family='Georgia,serif' font-size='28' font-weight='700' text-anchor='middle' fill='%23c8a951'%3EAF%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="/css/site.css?v=20261109">
+<script>document.documentElement.classList.add('js')</script>
+<script src="/assets/js/site.js?v=20261010" defer></script>
+<script src="/assets/js/plotly-2.35.2.min.js"></script>
+<script src="/assets/js/charts.js?v=20261109"></script>
+</head>
+<body>
+<header class="nav"><div class="nav-in"><a class="brand" href="/">Arsalan Fakhraei</a><nav class="links" aria-label="Main"><a href="/#work">Work</a><a href="/work/trading-system.html">Trading</a><a href="/#analytics" class="active">Analytics</a><a href="/#about">About</a></nav><a class="nav-cta" href="/assets/pdf/Arsalan_Fakhraei_Resume.pdf" target="_blank">Resume</a><button class="menu" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button></div></header>
+<main class="wrap">
+<div class="page-title"><div class="kicker">Business analytics · COMM 414 · SQL (BigQuery) · October 2026</div>
+<h1>Opening an independent café: what Yelp data says</h1>
+<p class="lead">This was a five-person team project in COMM 414 using the Yelp open dataset in Google BigQuery. We took the role of concept and operations consultants for someone planning to open an independent café, and used review text and check-in activity to guide two decisions: what customer experience to prioritize, and how to staff the café through the day.</p></div>
+
+<div class="facts"><div><b>387,402</b><span>Independent café reviews analyzed</span></div><div><b>4.45 vs 2.14</b><span>Average stars, friendly vs rude staff mentions</span></div><div><b>11 a.m.</b><span>Weekend check-in peak</span></div><div><b>12 p.m.</b><span>Weekday check-in peak</span></div></div>
+
+<h2>Setting up the sample</h2>
+<p>The first query compared four large chains (Starbucks, Dunkin', Tim Hortons and McDonald's) with all other coffee-related businesses. The chains averaged 2.47 stars against 4.05 for the others, and only 8.48% of chain locations were closed at the time of the snapshot, compared with 36.47% of the other cafés. Because chains operate under a different business model, we excluded them from the rest of the analysis, which left 4,286 independent cafés.</p>
+
+<h2>Which review themes go with higher ratings</h2>
+<p>We matched keywords in the lowercased review text against ten themes and compared each theme's average rating and share of one- and two-star reviews with the baseline of all café reviews (4.11 stars, 13.11% rated one or two stars). Reviews that mention friendly staff average 4.45 stars, while reviews that mention rude or unfriendly staff average 2.14, and 67% of them are rated one or two stars. Slow service and cleanliness are the other clear risks: only 1.04% of reviews mention dirty conditions, but 45% of those reviews are rated one or two stars.</p>
+<figure class="chart"><div id="yp-themes" style="height:470px"></div><figcaption>Average star rating of reviews that mention each theme, against the baseline of all independent café reviews. Hover for the number of reviews and the share rated one or two stars.</figcaption></figure>
+<p>These results make customer interaction the first priority before opening: clear standards for greeting customers, explaining delays and resolving complaints, supported by order-to-pickup times, queue length and cleaning checks. Keyword matches are a signal to investigate rather than a verified measure of sentiment, and none of these comparisons shows that changing one feature would raise ratings.</p>
+
+<h2>When cafés are busiest</h2>
+<p>Yelp stores check-ins as one long text field per business, so the query split each record into individual timestamps, converted them from UTC to each café's local time zone, and divided weekday and weekend totals by their number of calendar dates so the two can be compared fairly. Weekday activity builds through the morning and peaks at noon, at 17.65 check-ins per date. Weekend activity rises quickly after 8 a.m., peaks at 11 a.m. at 36.22, and stays well above weekdays until mid-afternoon.</p>
+<figure class="chart"><div id="yp-hours" style="height:360px"></div><figcaption>Average check-ins per calendar date across the independent café sample, by local hour. Hover to compare weekdays and weekends.</figcaption></figure>
+<p>For the owner, this means weekdays and weekends need different staffing plans: more staff from late morning to early afternoon on weekends, and weekday coverage focused around lunch, with part-time shifts covering the peaks rather than extra staff all day.</p>
+<p class="note">Limitations: check-ins are voluntary, so they measure Yelp activity rather than total customer traffic. Keyword themes do not capture context, and one review can match several themes. The time zone of Yelp timestamps is not documented; we tested the UTC assumption by comparing the busiest and quietest hours in Nevada and Pennsylvania before applying it.</p>
+
+<h2>Tools</h2>
+<p>Google BigQuery SQL: common table expressions, joins, regular-expression keyword matching with REGEXP_CONTAINS, CROSS JOIN with UNNEST and SPLIT to expand check-in strings, time-zone conversion, window functions (RANK with PARTITION BY) and conditional aggregation. The first part of the assignment covered five standard summaries, each submitted as an initial query, a refined final query and a short explanation of the changes.</p>
+<script>
+const DATA={"themes": [["Friendly staff", 73116, 18.87, 4.45, 4.93], ["Cozy atmosphere", 58260, 15.04, 4.35, 5.81], ["Espresso drinks", 47725, 12.32, 4.26, 8.98], ["Wifi, laptops and studying", 19797, 5.11, 4.19, 6.96], ["Parking", 14273, 3.68, 4.19, 6.82], ["Pastries and food", 72692, 18.76, 4.15, 10.83], ["All caf\u00e9 reviews (baseline)", 387402, 100.0, 4.11, 13.11], ["Price complaints", 17430, 4.5, 3.46, 23.41], ["Slow service or long wait", 16971, 4.38, 3.13, 36.11], ["Dirty", 4013, 1.04, 2.9, 45.1], ["Rude or unfriendly staff", 9395, 2.43, 2.14, 67.42]], "wk": [0.58, 0.35, 0.2, 0.17, 0.17, 0.65, 2.75, 8.26, 12.9, 14.05, 14.71, 15.42, 17.65, 15.33, 12.51, 10.66, 9.42, 9.1, 9.08, 8.72, 7.21, 4.87, 2.68, 1.42], "we": [1.64, 0.96, 0.62, 0.41, 0.22, 0.29, 1.07, 5.34, 15.17, 26.37, 34.38, 36.22, 33.9, 30.02, 24.72, 20.36, 16.83, 13.23, 11.35, 10.4, 8.7, 6.15, 3.72, 2.18]};
+(function(){
+ const t=[...DATA.themes].sort((a,b)=>a[3]-b[3]);
+ hbar('yp-themes',{y:t.map(d=>d[0]),x:t.map(d=>d[3]),color:t.map(d=>d[0].startsWith('All')?C.ink2:(d[3]>=4.11?C.blue:C.orange)),
+   text:t.map(d=>d[3].toFixed(2)),hover:t.map(d=>`<b>${d[0]}</b><br>${d[3].toFixed(2)} stars<br>${d[1].toLocaleString()} reviews (${d[2]}% of all)<br>${d[4]}% rated 1 or 2 stars`),
+   xtitle:'Average star rating',range:[1,5]});
+ const hrs=[...Array(24).keys()], lab=h=>h===0?'12 a.m.':h<12?h+' a.m.':h===12?'12 p.m.':(h-12)+' p.m.';
+ lines('yp-hours',{x:hrs,series:[{name:'Weekend',y:DATA.we,color:C.orange},{name:'Weekday',y:DATA.wk,color:C.blue}],
+   xtitle:'Local hour',ytitle:'Check-ins per date',tickvals:[0,3,6,9,12,15,18,21],ticktext:[0,3,6,9,12,15,18,21].map(lab)});
+})();
+</script>
+</main>
+<footer><div class="wrap"><span>© 2026 Arsalan Fakhraei · Vancouver, BC</span><span><a href="https://www.linkedin.com/in/arsalan-fakhraei/" target="_blank" rel="noopener">LinkedIn</a></span></div></footer>
+</body>
+</html>

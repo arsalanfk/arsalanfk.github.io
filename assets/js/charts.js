@@ -59,3 +59,26 @@ function divbar(id,o){ // P&L bars: gains blue, losses orange, value labels on e
     tickvals:[-8000,-4000,0,4000],ticktext:['−$8K','−$4K','$0','+$4K']}),
     yaxis:ax(null,{gridcolor:'rgba(0,0,0,0)',tickfont:{color:C.ink2,size:12}})});
   Plotly.newPlot(id,[t],lay,CFG);}
+// 100% stacked horizontal bars: two parts per row, labels inside.
+function stack100(id,o){
+  const mk=(s)=>({type:'bar',orientation:'h',name:s.name,y:o.y,x:s.vals,marker:{color:s.color,line:{color:'#fff',width:1}},
+    text:s.vals.map(v=>v>=(document.getElementById(id).clientWidth<600?12:6)?Math.round(v)+'%':''),textposition:'inside',insidetextanchor:'middle',textangle:0,
+    textfont:{color:s.textColor||'#fff',size:12},hovertext:o.hover?o.hover.map(h=>h(s)):undefined,hoverinfo:o.hover?'text':'x+name'});
+  const lay=base({barmode:'stack',bargap:0.28,showlegend:true,legend:{orientation:'h',x:0,y:1,yanchor:'bottom',font:{color:C.ink2,size:12.5},traceorder:'normal'},
+    xaxis:ax(o.xtitle||null,{range:[0,100],ticksuffix:'%',showgrid:false}),yaxis:ax(null,{gridcolor:'rgba(0,0,0,0)',tickfont:{color:C.ink2,size:12.5}}),
+    margin:{l:10,r:10,t:40,b:40}});
+  Plotly.newPlot(id,[mk(o.a),mk(o.b)],lay,CFG);}
+// Box plots from precomputed quartiles (no raw data shipped to the page).
+function boxq(id,groups,o){
+  const tr=groups.map(g=>({type:'box',name:g.name,q1:[g.q1],median:[g.med],q3:[g.q3],lowerfence:[g.lo],upperfence:[g.hi],x:[g.name],
+    marker:{color:g.color},line:{color:g.color,width:2},fillcolor:g.fill,boxpoints:false,hoverinfo:'y'}));
+  const ann=groups.map(g=>({x:g.name,y:g.q3,text:'Median $'+g.med,showarrow:false,yanchor:'bottom',yshift:6,font:{size:12.5,color:C.ink},bgcolor:'rgba(255,255,255,.85)'}));
+  const lay=base({showlegend:false,yaxis:ax(o.ytitle,{tickprefix:'$',rangemode:'tozero'}),xaxis:ax(null,{gridcolor:'rgba(0,0,0,0)',tickfont:{color:C.ink2,size:12.5}}),annotations:ann});
+  Plotly.newPlot(id,tr,lay,CFG);}
+// Simple multi-line chart with a shared hover.
+function lines(id,o){
+  const tr=o.series.map(s=>({type:'scatter',mode:'lines+markers',name:s.name,x:o.x,y:s.y,line:{color:s.color,width:2.5},marker:{size:6,color:s.color},
+    hovertemplate:s.name+': %{y}<extra></extra>'}));
+  const lay=base({showlegend:true,hovermode:'x unified',legend:{orientation:'h',x:0,y:1.1,font:{color:C.ink2,size:12.5}},
+    xaxis:ax(o.xtitle,{tickvals:o.tickvals,ticktext:o.ticktext}),yaxis:ax(o.ytitle,{rangemode:'tozero'}),margin:{l:10,r:20,t:30,b:50}});
+  Plotly.newPlot(id,tr,lay,CFG);}

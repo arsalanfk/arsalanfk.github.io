@@ -260,3 +260,6 @@ main.wrap+footer,main+footer{margin-top:110px}
   table.spec th,table.spec td{padding:12px 12px}
   .grid{grid-template-columns:1fr}
 }
+
+.grid.four{grid-template-columns:repeat(2,1fr)}
+@media (max-width:720px){.grid.four{grid-template-columns:1fr}}
